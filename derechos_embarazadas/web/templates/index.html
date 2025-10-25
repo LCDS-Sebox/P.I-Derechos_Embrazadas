@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Derechos de las Embarazadas en Chile</h1>
+        <p>Conoce tus derechos durante el embarazo</p>
+        {% if not user.is_authenticated %}
+            <button class="cta-button" onclick="openModal()">Iniciar Sesión</button>
+        {% else %}
+            <button class="cta-button" onclick="alert('¡Bienvenida!')">Explorar Recursos</button>
+        {% endif %}
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sección Derechos -->
+        <section class="section" id="derechos">
+            <h2>Tus Derechos Fundamentales</h2>
+            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">⚖️</div>
+                    <h3>Protección Legal</h3>
+                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏥</div>
+                    <h3>Atención Médica</h3>
+                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👶</div>
+                    <h3>Licencias Maternales</h3>
+                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Recursos -->
+        <section class="section" id="recursos">
+            <h2>Recursos Disponibles</h2>
+            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>📚 Documentos</h3>
+                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                    <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Ver Documentos</button>
+                </div>
+
+                <div class="card">
+                    <h3>🧮 Calculadoras</h3>
+                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                    <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Calcular Licencias</button>
+                </div>
+
+                <div class="card">
+                    <h3>📞 Asesoría</h3>
+                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                    <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Solicitar Asesoría</button>
+                </div>
+
+                <div class="card">
+                    <h3>💬 Foro</h3>
+                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                    <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Ir al Foro</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section class="newsletter" id="contacto">
+            <h3>Mantente Informada</h3>
+            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Funcionalidad no disponible');">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">Suscribirme</button>
+            </form>
+        </section>
+    </div>
+{% endblock %}
