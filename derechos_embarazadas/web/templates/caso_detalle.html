@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container caso-detalle">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="{% url 'home' %}">Inicio</a> / 
+            <a href="{% url 'casos_categoria' caso.categoria %}">{{ caso.get_categoria_display }}</a> / 
+            <span>{{ caso.titulo }}</span>
+        </div>
+
+        <!-- Título del caso -->
+        <div class="caso-header">
+            <div class="caso-icon">{{ caso.icono }}</div>
+            <div>
+                <span class="caso-categoria">{{ caso.get_categoria_display }}</span>
+                <h1>{{ caso.titulo }}</h1>
+            </div>
+        </div>
+
+        <!-- Descripción completa -->
+        <section class="caso-section">
+            <h2>Descripción del Problema</h2>
+            <div class="caso-content">
+                {{ caso.descripcion_completa|linebreaks }}
+            </div>
+        </section>
+
+        <!-- Qué hacer -->
+        <section class="caso-section">
+            <h2>¿Qué hacer en esta situación?</h2>
+            <div class="caso-content importante">
+                {{ caso.que_hacer|linebreaks }}
+            </div>
+        </section>
+
+        <!-- Dónde acudir -->
+        <section class="caso-section">
+            <h2>¿Dónde acudir por ayuda?</h2>
+            <div class="caso-content">
+                {{ caso.donde_acudir|linebreaks }}
+            </div>
+        </section>
+
+        {% if caso.leyes_aplicables %}
+        <!-- Leyes aplicables -->
+        <section class="caso-section">
+            <h2>Marco Legal</h2>
+            <div class="caso-content legal">
+                {{ caso.leyes_aplicables|linebreaks }}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if caso.ejemplos %}
+        <!-- Ejemplos -->
+        <section class="caso-section">
+            <h2>Ejemplos de Casos</h2>
+            <div class="caso-content ejemplos">
+                {{ caso.ejemplos|linebreaks }}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Contactos de ayuda -->
+        <section class="caso-section">
+            <h2>Contactos de Ayuda</h2>
+            <div class="contactos-ayuda">
+                <div class="contacto-card">
+                    <h3> Dirección del Trabajo</h3>
+                    <p>Teléfono: 600 450 4000</p>
+                    <p>Para denuncias laborales</p>
+                </div>
+                <div class="contacto-card">
+                    <h3> Salud Responde</h3>
+                    <p>Teléfono: 600 360 7777</p>
+                    <p>Para consultas de salud</p>
+                </div>
+                <div class="contacto-card">
+                    <h3> Chile Atiende</h3>
+                    <p>Teléfono: 101</p>
+                    <p>Información general</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos relacionados -->
+        {% if casos_relacionados %}
+        <section class="caso-section">
+            <h2>Casos Relacionados</h2>
+            <div class="cards-grid">
+                {% for caso_rel in casos_relacionados %}
+                <a href="{% url 'caso_detalle' caso_rel.id %}" class="card-link">
+                    <div class="card">
+                        <div class="card-icon">{{ caso_rel.icono }}</div>
+                        <h3>{{ caso_rel.titulo }}</h3>
+                        <p>{{ caso_rel.descripcion_corta }}</p>
+                        <span class="ver-mas">Ver más →</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Botón volver -->
+        <div class="boton-volver">
+            <a href="{% url 'home' %}" class="btn-back">← Volver al Inicio</a>
+        </div>
+    </div>
+{% endblock %}

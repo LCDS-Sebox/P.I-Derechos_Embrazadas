@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="{% url 'home' %}">Inicio</a> / 
+            <span>{{ categoria_nombre }}</span>
+        </div>
+
+        <!-- Título -->
+        <section class="section">
+            <h1>{{ categoria_nombre }}</h1>
+            <p>Todos los casos relacionados con {{ categoria_nombre|lower }}</p>
+        </section>
+
+        <!-- Lista de casos -->
+        {% if casos %}
+        <div class="cards-grid">
+            {% for caso in casos %}
+            <a href="{% url 'caso_detalle' caso.id %}" class="card-link">
+                <div class="card">
+                    <div class="card-icon">{{ caso.icono }}</div>
+                    <h3>{{ caso.titulo }}</h3>
+                    <p>{{ caso.descripcion_corta }}</p>
+                    <span class="ver-mas">Ver más →</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-casos">
+            <p>No hay casos disponibles en esta categoría por el momento.</p>
+            <a href="{% url 'home' %}" class="btn-back">← Volver al Inicio</a>
+        </div>
+        {% endif %}
+
+        <!-- Botón volver -->
+        <div class="boton-volver">
+            <a href="{% url 'home' %}" class="btn-back">← Volver al Inicio</a>
+        </div>
+    </div>
+{% endblock %}

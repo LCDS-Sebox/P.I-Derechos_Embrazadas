@@ -17,55 +17,97 @@
         <!-- Sección Derechos -->
         <section class="section" id="derechos">
             <h2>Tus Derechos Fundamentales</h2>
-            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+            <p>Conoce los diferentes casos y situaciones donde tus derechos deben ser respetados. Haz clic en cada caso para ver información detallada.</p>
             
             <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon">⚖️</div>
-                    <h3>Protección Legal</h3>
-                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏥</div>
-                    <h3>Atención Médica</h3>
-                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">👶</div>
-                    <h3>Licencias Maternales</h3>
-                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
-                </div>
+                {% if casos %}
+                    {% for caso in casos %}
+                    <a href="{% url 'caso_detalle' caso.id %}" class="card-link">
+                        <div class="card">
+                            <div class="card-icon">{{ caso.icono }}</div>
+                            <h3>{{ caso.titulo }}</h3>
+                            <p>{{ caso.descripcion_corta }}</p>
+                            <span class="ver-mas">Ver más →</span>
+                        </div>
+                    </a>
+                    {% endfor %}
+                {% else %}
+                    <!-- Casos de ejemplo si no hay en la base de datos -->
+                    <div class="card">
+                        <h3>Protección Legal</h3>
+                        <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Atención Médica</h3>
+                        <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Licencias Maternales</h3>
+                        <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <!-- Sección Categorías -->
+        <section class="section">
+            <h2>Buscar por Categoría</h2>
+            <div class="cards-grid">
+                <a href="{% url 'casos_categoria' 'legal' %}" class="card-link">
+                    <div class="card card-categoria">
+                        <h3>Protección Legal</h3>
+                        <p>Ver todos los casos</p>
+                    </div>
+                </a>
+                <a href="{% url 'casos_categoria' 'medica' %}" class="card-link">
+                    <div class="card card-categoria">
+                        <h3>Atención Médica</h3>
+                        <p>Ver todos los casos</p>
+                    </div>
+                </a>
+                <a href="{% url 'casos_categoria' 'laboral' %}" class="card-link">
+                    <div class="card card-categoria">
+                        <h3>Derechos Laborales</h3>
+                        <p>Ver todos los casos</p>
+                    </div>
+                </a>
+                <a href="{% url 'casos_categoria' 'licencias' %}" class="card-link">
+                    <div class="card card-categoria">
+                        <h3>Licencias Maternales</h3>
+                        <p>Ver todos los casos</p>
+                    </div>
+                </a>
             </div>
         </section>
 
         <!-- Sección Recursos -->
         <section class="section" id="recursos">
             <h2>Recursos Disponibles</h2>
-            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+            <p>Herramientas y recursos adicionales para ayudarte.</p>
             
             <div class="cards-grid">
                 <div class="card">
-                    <h3>📚 Documentos</h3>
-                    <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
-                    <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Ver Documentos</button>
+                    <h3>Documentos</h3>
+                    <p>Accede a documentos importantes sobre tus derechos durante el embarazo. Encuentra guías, formularios y recursos útiles.</p>
+                    <a href="{% url 'documentos_index' %}" class="btn-resource">Ver Documentos</a>
                 </div>
 
                 <div class="card">
-                    <h3>🧮 Calculadoras</h3>
+                    <h3> Calculadoras</h3>
                     <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
                     <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Calcular Licencias</button>
                 </div>
 
                 <div class="card">
-                    <h3>📞 Asesoría</h3>
+                    <h3> Asesoría</h3>
                     <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
                     <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Solicitar Asesoría</button>
                 </div>
 
                 <div class="card">
-                    <h3>💬 Foro</h3>
+                    <h3> Foro</h3>
                     <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
-                    <button class="btn-resource" onclick="alert('Funcionalidad no disponible')">Ir al Foro</button>
+                    <a href="{% url 'foro_index' %}" class="btn-resource">Ir al Foro</a>
                 </div>
             </div>
         </section>

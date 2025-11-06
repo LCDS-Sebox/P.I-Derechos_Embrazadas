@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container caso-detalle">
+    <div class="caso-header">
+        <h1>{{ thread.title }}</h1>
+        {% if thread.author %}
+            <p>Iniciado por {{ thread.author.username }} • {{ thread.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+        {% else %}
+            <p>Iniciado por Anónimo • {{ thread.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+        {% endif %}
+    </div>
+
+    <section class="caso-section">
+        <h2>Respuestas</h2>
+        <div class="cards-grid">
+            {% for post in posts %}
+            <div class="card">
+                <p>{{ post.content|linebreaks }}</p>
+                {% if post.author %}
+                    <small>Por {{ post.author.username }} • {{ post.created_at|date:"SHORT_DATETIME_FORMAT" }}</small>
+                {% else %}
+                    <small>Por Anónimo • {{ post.created_at|date:"SHORT_DATETIME_FORMAT" }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% if user.is_authenticated %}
+    <section class="caso-section">
+        <h2>Responder</h2>
+        <form method="post" action="{% url 'foro_reply' thread.id %}">
+            {% csrf_token %}
+            {{ reply_form.as_p }}
+            <button type="submit" class="btn-resource">Publicar respuesta</button>
+        </form>
+    </section>
+    {% else %}
+        <p>Debes iniciar sesión para responder.</p>
+    {% endif %}
+
+    <div class="boton-volver">
+        <a href="{% url 'foro_index' %}" class="btn-back">← Volver al Foro</a>
+    </div>
+</div>
+{% endblock %}

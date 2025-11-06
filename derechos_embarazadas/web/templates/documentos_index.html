@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <section class="section">
+        <h1>Documentos</h1>
+        
+        <!-- Filtros -->
+        <div class="filters">
+            <form method="get" class="filter-form">
+                <div class="search-box">
+                    <input type="text" name="q" placeholder="Buscar documentos..." value="{{ busqueda|default:'' }}">
+                    <button type="submit" class="btn-search">Buscar</button>
+                </div>
+                
+                <div class="tags-filter">
+                    <h3>Filtrar por etiquetas:</h3>
+                    <div class="tags-grid">
+                        {% for tag in etiquetas %}
+                        <label class="tag-checkbox">
+                            <input type="checkbox" name="tags" value="{{ tag.id }}"
+                                {% if tag.id in etiquetas_seleccionadas %}checked{% endif %}>
+                            <span class="tag" style="background-color: {{ tag.color }}">
+                                {{ tag.nombre }}
+                            </span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn-filter">Aplicar filtros</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista de documentos -->
+        <div class="documents-grid">
+            {% for doc in documentos %}
+            <div class="document-card">
+                <div class="document-icon">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                    </svg>
+                </div>
+                <div class="document-info">
+                    <h3>{{ doc.titulo }}</h3>
+                    <p>{{ doc.descripcion|truncatewords:30 }}</p>
+                    <div class="document-tags">
+                        {% for tag in doc.etiquetas.all %}
+                        <span class="tag" style="background-color: {{ tag.color }}">{{ tag.nombre }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="document-footer">
+                        <span class="date">{{ doc.fecha_subida|date:"d/m/Y" }}</span>
+                        <a href="{{ doc.archivo.url }}" class="btn-download" target="_blank">Ver PDF</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-results">
+                <p>No se encontraron documentos.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

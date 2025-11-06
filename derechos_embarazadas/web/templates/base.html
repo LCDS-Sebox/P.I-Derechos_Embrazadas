@@ -11,7 +11,7 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">🤰 Derechos Embarazadas</div>
+            <div class="logo"> Derechos Embarazadas</div>
             <ul class="nav-links">
                 <li><a href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="#derechos">Derechos</a></li>
@@ -26,7 +26,8 @@
                         <button type="submit" class="btn-login">Cerrar Sesión</button>
                     </form>
                 {% else %}
-                    <button class="btn-login" onclick="openModal()">Iniciar Sesión</button>
+                    <button class="btn-login" onclick="openLoginModal()">Iniciar Sesión</button>
+                    <button class="btn-register" onclick="openRegisterModal()">Registrarse</button>
                 {% endif %}
             </div>
         </nav>
@@ -91,11 +92,16 @@
                 </div>
                 <div class="modal-buttons">
                     <button type="submit" class="btn-submit">Entrar</button>
-                    <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                    <button type="button" class="btn-cancel" onclick="closeLoginModal()">Cancelar</button>
                 </div>
             </form>
+            <div class="modal-footer">
+                <p>¿No tienes cuenta? <a href="#" onclick="openRegisterModal();closeLoginModal()">Regístrate aquí</a></p>
+            </div>
         </div>
     </div>
+
+    {% include 'register_modal.html' %}
 
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>

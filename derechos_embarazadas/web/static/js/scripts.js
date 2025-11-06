@@ -1,20 +1,38 @@
-// Abrir modal de login
-function openModal() {
+// Funciones para el modal de login
+function openLoginModal() {
     document.getElementById('loginModal').classList.add('active');
 }
 
-// Cerrar modal
-function closeModal() {
+function closeLoginModal() {
     document.getElementById('loginModal').classList.remove('active');
 }
 
-// Cerrar modal al hacer clic fuera
+// Funciones para el modal de registro
+function openRegisterModal() {
+    document.getElementById('registerModal').classList.add('active');
+}
+
+function closeRegisterModal() {
+    document.getElementById('registerModal').classList.remove('active');
+}
+
+// Cerrar modales al hacer clic fuera
 document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('loginModal');
-    if (modal) {
-        modal.addEventListener('click', function(e) {
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+
+    if (loginModal) {
+        loginModal.addEventListener('click', function(e) {
             if (e.target === this) {
-                closeModal();
+                closeLoginModal();
+            }
+        });
+    }
+
+    if (registerModal) {
+        registerModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRegisterModal();
             }
         });
     }
